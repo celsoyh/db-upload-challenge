@@ -14,7 +14,7 @@ class DeleteTransactionService {
     });
 
     if (!transactionExists) {
-      throw new AppError('Repository does not exist.');
+      throw new AppError('Transaction does not exist.');
     }
 
     const deletedObj = await transactionRepository.remove(transactionExists);
