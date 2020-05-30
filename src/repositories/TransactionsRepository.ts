@@ -9,8 +9,8 @@ interface Balance {
 }
 
 interface Response {
-  Transaction: Transaction[];
-  Balance: Balance;
+  transactions: Transaction[];
+  balance: Balance;
 }
 
 @EntityRepository(Transaction)
@@ -45,7 +45,7 @@ class TransactionsRepository extends Repository<Transaction> {
       },
     );
 
-    return { allTransactions, balance };
+    return { transactions: allTransactions, balance };
   }
 }
 

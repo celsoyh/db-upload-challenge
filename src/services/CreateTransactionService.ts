@@ -23,12 +23,12 @@ class CreateTransactionService {
     const transactions = await transactionRepository.getBalance();
 
     let categoryExists = await categoriesRepository.findOne({
-      where: { category },
+      where: { title: category },
     });
 
     if (!categoryExists) {
       categoryExists = categoriesRepository.create({
-        title,
+        title: category,
       });
 
       await categoriesRepository.save(categoryExists);
@@ -37,6 +37,7 @@ class CreateTransactionService {
     if (type === 'outcome' && value > transactions.balance.total) {
       throw new AppError(
         `Your outcome shouldn't be more than you total balance.`,
+        400,
       );
     }
 

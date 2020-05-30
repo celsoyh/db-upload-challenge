@@ -6,7 +6,7 @@ interface Request {
   id: string;
 }
 class DeleteTransactionService {
-  public async execute({ id }: Request): Promise<Transaction> {
+  public async execute({ id }: Request): Promise<void> {
     const transactionRepository = getCustomRepository(TransactionRepository);
 
     const transactionExists = await transactionRepository.findOne({
@@ -17,9 +17,7 @@ class DeleteTransactionService {
       throw new AppError('Transaction does not exist.');
     }
 
-    const deletedObj = await transactionRepository.remove(transactionExists);
-
-    return deletedObj;
+    await transactionRepository.remove(transactionExists);
   }
 }
 
