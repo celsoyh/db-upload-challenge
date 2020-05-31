@@ -17,7 +17,7 @@ class CreateTransactionService {
     value,
     type,
     category,
-  }: Request): Promise<Omit<Transaction, 'id'>> {
+  }: Request): Promise<Transaction> {
     const transactionRepository = getCustomRepository(TransactionRepository);
     const categoriesRepository = getRepository(Categories);
     const transactions = await transactionRepository.getBalance();
@@ -45,7 +45,7 @@ class CreateTransactionService {
       title,
       value,
       type,
-      category_id: categoryExists,
+      category: categoryExists,
     });
 
     await transactionRepository.save(transaction);

@@ -11,7 +11,6 @@ const upload = multer(multerConfig);
 const transactionsRouter = Router();
 
 transactionsRouter.get('/', async (request, response) => {
-  // TODO
   const transactionsRepository = new TransactionsRepository();
 
   const transactions = await transactionsRepository.getBalance();
@@ -48,11 +47,10 @@ transactionsRouter.post(
   '/import',
   upload.single('transactions'),
   async (request, response) => {
-    // TODO
     const importTransactionsService = new ImportTransactionsService();
 
     const importedTransactions = await importTransactionsService.execute(
-      request.file,
+      request.file.path,
     );
 
     return response.json(importedTransactions);
